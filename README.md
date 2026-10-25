@@ -18,21 +18,18 @@
 
 ## 📌 Overview
 
-Password policy auditor & compliance hardening advisor (NIST, CIS, PCI-DSS, PAM, GPO)
+OPolicy is a password-policy auditor and hardening advisor. It builds, parses and compares password policies from formats such as JSON, PAM, Windows GPO/secedit, AWS IAM and Keycloak, and evaluates them against standards including NIST SP 800-63B, CIS and PCI-DSS. It performs no cracking and uses no online APIs.
 
 ---
 
 ## ✨ Features
 
-- Interactive policy builder — length, complexity, history, lockout, MFA, expiry, blocklist, breach screening, paste, hints, KBA; scored A+…F report
-- Policy parser — JSON, key=value, free text, Windows secedit INF / `net accounts` / GPO, Linux PAM (pwquality, pam_unix, faillock, login.defs), AWS IAM JSON and Keycloak policy strings
-- Standards engine — NIST SP 800-63B, CIS, PCI-DSS 4.0, ISO 27001, Microsoft, Google Workspace, AD defaults with per-control pass / fail / warn and coverage %
-- Password-list auditor (plaintext only) — length histogram, charset mix, entropy, keyboard walks, dates, leetspeak, repeats, sequences, reused prefixes / suffixes, compliance % vs a policy
-- Breach-pattern detector — offline pattern library (season+year, Name123!, qwerty, company+year, ...)
-- Policy comparison — field diff and gap analysis
-- Remediation generator — pam_pwquality, faillock, GPO registry / PowerShell, FreeIPA, Keycloak, Okta, AWS IAM password policy JSON
-- Save report (TXT / CSV / JSON) with location chooser
-- Full CLI mode (-p policy.json --standard all, ...)
+- Interactive policy builder covering length, complexity, lockout, MFA and breach screening
+- Policy parser for JSON, PAM, Windows GPO/secedit, AWS IAM and Keycloak formats
+- Standards engine (NIST, CIS, PCI-DSS, ISO 27001, Microsoft, Google) with per-control results
+- Plaintext password-list auditor with entropy, pattern and compliance analysis
+- Offline breach-pattern detection and policy-to-policy comparison
+- Remediation generator (pam_pwquality, faillock, GPO, FreeIPA, Keycloak, Okta, AWS IAM) with TXT/CSV/JSON export
 
 ---
 
@@ -46,7 +43,10 @@ Password policy auditor & compliance hardening advisor (NIST, CIS, PCI-DSS, PAM,
 ## 🚀 Usage
 
 ```bash
-./OPolicy
+./OPolicy -p policy.json -s nist,cis
+./OPolicy --audit-list passwords.txt --company acme
+./OPolicy -p policyA.json --compare policyB.json
+./OPolicy --help
 ```
 
 ---
